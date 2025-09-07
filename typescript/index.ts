@@ -1,6 +1,7 @@
 import { EmailNotification, PushNotification } from "./factoryMethod";
 import { App, MongoFactory, MySQLFactory } from "./abstractFactory";
 import { VegMealBuilder, MealDirector, NonVegMealBuilder, } from "./builder";
+import { Rectangle, Circle } from "./prototype";
 //factory-method test
 const email = new EmailNotification()
 email.notifyUser('Hello by email !')
@@ -31,3 +32,22 @@ const director2 = new MealDirector(nonVegBuilder);
 director2.constructNonVegMeal();
 const nonVegMeal = nonVegBuilder.getResult();
 nonVegMeal.showItems();
+
+
+// prototype test
+const circle1 = new Circle(5, 5, "Red", 10);
+circle1.draw();
+
+const circle2 = circle1.clone() as Circle;
+circle2.color = "Blue";
+circle2.draw();
+
+const rect1 = new Rectangle(0, 0, "Green", 20, 15);
+rect1.draw();
+
+const rect2 = rect1.clone() as Rectangle;
+rect2.width = 30;
+rect2.height = 25;
+rect2.draw();
+
+
