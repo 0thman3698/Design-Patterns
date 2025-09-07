@@ -2,6 +2,7 @@ import { EmailNotification, PushNotification } from "./factoryMethod";
 import { App, MongoFactory, MySQLFactory } from "./abstractFactory";
 import { VegMealBuilder, MealDirector, NonVegMealBuilder, } from "./builder";
 import { Rectangle, Circle } from "./prototype";
+import { Logger } from "./singleton";
 //factory-method test
 const email = new EmailNotification()
 email.notifyUser('Hello by email !')
@@ -49,5 +50,11 @@ const rect2 = rect1.clone() as Rectangle;
 rect2.width = 30;
 rect2.height = 25;
 rect2.draw();
+// singleton test
+const logger1 = Logger.getInstance()
+logger1.log('first message')
 
+const logger2 = Logger.getInstance()
+logger2.log('second message ')
 
+console.log(`all logs: ${logger1.getLogs()}`)

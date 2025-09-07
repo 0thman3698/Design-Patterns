@@ -671,6 +671,7 @@ var _factoryMethod = require("./factoryMethod");
 var _abstractFactory = require("./abstractFactory");
 var _builder = require("./builder");
 var _prototype = require("./prototype");
+var _singleton = require("./singleton");
 //factory-method test
 const email = new (0, _factoryMethod.EmailNotification)();
 email.notifyUser('Hello by email !');
@@ -705,8 +706,14 @@ const rect2 = rect1.clone();
 rect2.width = 30;
 rect2.height = 25;
 rect2.draw();
+// singleton test
+const logger1 = (0, _singleton.Logger).getInstance();
+logger1.log('first message');
+const logger2 = (0, _singleton.Logger).getInstance();
+logger2.log('second message ');
+console.log(`all logs: ${logger1.getLogs()}`);
 
-},{"./factoryMethod":"5dJJI","./abstractFactory":"aVf1F","./builder":"8NQdt","./prototype":"9maS7"}],"5dJJI":[function(require,module,exports,__globalThis) {
+},{"./factoryMethod":"5dJJI","./abstractFactory":"aVf1F","./builder":"8NQdt","./prototype":"9maS7","./singleton":"h1nCn"}],"5dJJI":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Email", ()=>Email);
@@ -942,6 +949,29 @@ class Rectangle {
     }
     clone() {
         return new Rectangle(this.x, this.y, this.color, this.height, this.width);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"h1nCn":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Logger", ()=>Logger);
+class Logger {
+    constructor(){
+        this.logs = [];
+    }
+    static getInstance() {
+        if (!Logger.instance) Logger.instance = new Logger();
+        return Logger.instance;
+    }
+    log(msg) {
+        const timestamp = new Date().toISOString();
+        const fullMessage = `[${timestamp}] ${msg}`;
+        this.logs.push(fullMessage);
+        console.log(`${fullMessage}`);
+    }
+    getLogs() {
+        return this.logs;
     }
 }
 
