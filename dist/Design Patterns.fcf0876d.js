@@ -667,11 +667,11 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"aPy6N":[function(require,module,exports,__globalThis) {
-var _factoryMethod = require("./factoryMethod");
-var _abstractFactory = require("./abstractFactory");
-var _builder = require("./builder");
-var _prototype = require("./prototype");
-var _singleton = require("./singleton");
+var _factoryMethod = require("./Creational design patterns/factoryMethod");
+var _abstractFactory = require("./Creational design patterns/abstractFactory");
+var _builder = require("./Creational design patterns/builder");
+var _prototype = require("./Creational design patterns/prototype");
+var _singleton = require("./Creational design patterns/singleton");
 //factory-method test
 const email = new (0, _factoryMethod.EmailNotification)();
 email.notifyUser('Hello by email !');
@@ -711,9 +711,13 @@ const logger1 = (0, _singleton.Logger).getInstance();
 logger1.log('first message');
 const logger2 = (0, _singleton.Logger).getInstance();
 logger2.log('second message ');
-console.log(`all logs: ${logger1.getLogs()}`);
+console.log(`all logs: ${logger1.getLogs()}`) /////////////////////////
+ //structural Design Pattern
+ /////////////////////////
+ //adapter test 
+;
 
-},{"./factoryMethod":"5dJJI","./abstractFactory":"aVf1F","./builder":"8NQdt","./prototype":"9maS7","./singleton":"h1nCn"}],"5dJJI":[function(require,module,exports,__globalThis) {
+},{"./Creational design patterns/factoryMethod":"hNQUX","./Creational design patterns/abstractFactory":"1zM3b","./Creational design patterns/builder":"3YPuM","./Creational design patterns/prototype":"1ut1T","./Creational design patterns/singleton":"aQE9D"}],"hNQUX":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Email", ()=>Email);
@@ -792,7 +796,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"aVf1F":[function(require,module,exports,__globalThis) {
+},{}],"1zM3b":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MongoConnection", ()=>MongoConnection);
@@ -849,7 +853,7 @@ class App {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"8NQdt":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"3YPuM":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Meal", ()=>Meal);
@@ -917,7 +921,7 @@ class MealDirector {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"9maS7":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"1ut1T":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Circle", ()=>Circle);
@@ -952,7 +956,7 @@ class Rectangle {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"h1nCn":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"aQE9D":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Logger", ()=>Logger);

@@ -1,8 +1,10 @@
-import { EmailNotification, PushNotification } from "./factoryMethod";
-import { App, MongoFactory, MySQLFactory } from "./abstractFactory";
-import { VegMealBuilder, MealDirector, NonVegMealBuilder, } from "./builder";
-import { Rectangle, Circle } from "./prototype";
-import { Logger } from "./singleton";
+import { EmailNotification, PushNotification } from "./Creational design patterns/factoryMethod";
+import { App, MongoFactory, MySQLFactory } from "./Creational design patterns/abstractFactory";
+import { VegMealBuilder, MealDirector, NonVegMealBuilder, } from "./Creational design patterns/builder";
+import { Rectangle, Circle } from "./Creational design patterns/prototype";
+import { Logger } from "./Creational design patterns/singleton";
+
+import { OldEmailService, INotifier, EmailAdapter, SlackAdapter, SlackAPI } from "./Structural Design Patterns/adapter";
 //factory-method test
 const email = new EmailNotification()
 email.notifyUser('Hello by email !')
@@ -58,3 +60,16 @@ const logger2 = Logger.getInstance()
 logger2.log('second message ')
 
 console.log(`all logs: ${logger1.getLogs()}`)
+/////////////////////////
+//structural Design Pattern
+/////////////////////////
+
+//adapter test 
+const emailService = new OldEmailService();
+const slackApi = new SlackAPI();
+
+const emailNotifier: INotifier = new EmailAdapter(emailService);
+const slackNotifier: INotifier = new SlackAdapter(slackApi);
+
+emailNotifier.sendNotification("Hello via Email!");
+slackNotifier.sendNotification("Hello via Slack!");
