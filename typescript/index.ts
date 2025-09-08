@@ -5,6 +5,11 @@ import { Rectangle, Circle } from "./Creational design patterns/prototype";
 import { Logger } from "./Creational design patterns/singleton";
 
 import { OldEmailService, INotifier, EmailAdapter, SlackAdapter, SlackAPI } from "./Structural Design Patterns/adapter";
+import { Red, Blue, Circlee, Square } from "./Structural Design Patterns/bridge";
+
+/////////////////////////
+//creational Design Pattern
+/////////////////////////
 //factory-method test
 const email = new EmailNotification()
 email.notifyUser('Hello by email !')
@@ -73,3 +78,13 @@ const slackNotifier: INotifier = new SlackAdapter(slackApi);
 
 emailNotifier.sendNotification("Hello via Email!");
 slackNotifier.sendNotification("Hello via Slack!");
+
+//bridge test 
+const red = new Red();
+const blue = new Blue();
+
+const circle = new Circlee(red);
+circle.draw();
+
+const square = new Square(blue);
+square.draw();   

@@ -672,6 +672,11 @@ var _abstractFactory = require("./Creational design patterns/abstractFactory");
 var _builder = require("./Creational design patterns/builder");
 var _prototype = require("./Creational design patterns/prototype");
 var _singleton = require("./Creational design patterns/singleton");
+var _adapter = require("./Structural Design Patterns/adapter");
+var _bridge = require("./Structural Design Patterns/bridge");
+/////////////////////////
+//creational Design Pattern
+/////////////////////////
 //factory-method test
 const email = new (0, _factoryMethod.EmailNotification)();
 email.notifyUser('Hello by email !');
@@ -711,13 +716,26 @@ const logger1 = (0, _singleton.Logger).getInstance();
 logger1.log('first message');
 const logger2 = (0, _singleton.Logger).getInstance();
 logger2.log('second message ');
-console.log(`all logs: ${logger1.getLogs()}`) /////////////////////////
- //structural Design Pattern
- /////////////////////////
- //adapter test 
-;
+console.log(`all logs: ${logger1.getLogs()}`);
+/////////////////////////
+//structural Design Pattern
+/////////////////////////
+//adapter test 
+const emailService = new (0, _adapter.OldEmailService)();
+const slackApi = new (0, _adapter.SlackAPI)();
+const emailNotifier = new (0, _adapter.EmailAdapter)(emailService);
+const slackNotifier = new (0, _adapter.SlackAdapter)(slackApi);
+emailNotifier.sendNotification("Hello via Email!");
+slackNotifier.sendNotification("Hello via Slack!");
+//bridge test 
+const red = new (0, _bridge.Red)();
+const blue = new (0, _bridge.Blue)();
+const circle = new (0, _bridge.Circlee)(red);
+circle.draw();
+const square = new (0, _bridge.Square)(blue);
+square.draw();
 
-},{"./Creational design patterns/factoryMethod":"hNQUX","./Creational design patterns/abstractFactory":"1zM3b","./Creational design patterns/builder":"3YPuM","./Creational design patterns/prototype":"1ut1T","./Creational design patterns/singleton":"aQE9D"}],"hNQUX":[function(require,module,exports,__globalThis) {
+},{"./Creational design patterns/factoryMethod":"hNQUX","./Creational design patterns/abstractFactory":"1zM3b","./Creational design patterns/builder":"3YPuM","./Creational design patterns/prototype":"1ut1T","./Creational design patterns/singleton":"aQE9D","./Structural Design Patterns/adapter":"kTpb5","./Structural Design Patterns/bridge":"4fMVo"}],"hNQUX":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Email", ()=>Email);
@@ -976,6 +994,77 @@ class Logger {
     }
     getLogs() {
         return this.logs;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"kTpb5":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OldEmailService", ()=>OldEmailService);
+parcelHelpers.export(exports, "SlackAPI", ()=>SlackAPI);
+parcelHelpers.export(exports, "EmailAdapter", ()=>EmailAdapter);
+parcelHelpers.export(exports, "SlackAdapter", ()=>SlackAdapter);
+class OldEmailService {
+    sendEmail(content) {
+        console.log(`sendeing email with content: ${content}`);
+    }
+}
+class SlackAPI {
+    postMessage(text) {
+        console.log(`\u{1F4AC} Posting Slack message: ${text}`);
+    }
+}
+class EmailAdapter {
+    constructor(emailservice){
+        this.emailService = emailservice;
+    }
+    sendNotification(msg) {
+        console.log(`Adapter converting sendNotification() to sendEmail()`);
+        this.emailService.sendEmail(msg);
+    }
+}
+class SlackAdapter {
+    constructor(slackApi){
+        this.slackApi = slackApi;
+    }
+    sendNotification(msg) {
+        console.log('adapter converting sendNotification() to postMessage()');
+        this.slackApi.postMessage(msg);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4fMVo":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Red", ()=>Red);
+parcelHelpers.export(exports, "Blue", ()=>Blue);
+// ////////
+parcelHelpers.export(exports, "IShape", ()=>IShape);
+parcelHelpers.export(exports, "Circlee", ()=>Circlee);
+parcelHelpers.export(exports, "Square", ()=>Square);
+class Red {
+    applyColor() {
+        return "Red";
+    }
+}
+class Blue {
+    applyColor() {
+        return "Blue";
+    }
+}
+class IShape {
+    constructor(color){
+        this.color = color;
+    }
+}
+class Circlee extends IShape {
+    draw() {
+        console.log(`drawing Circle in ${this.color.applyColor()}`);
+    }
+}
+class Square extends IShape {
+    draw() {
+        console.log(`drawing Square in ${this.color.applyColor()}`);
     }
 }
 
